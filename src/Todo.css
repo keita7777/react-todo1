@@ -84,13 +84,14 @@ table.todo-area td {
 
 table.todo-area th {
   background-color: aqua;
+  padding: 5px;
 }
 
 table.todo-area th:nth-of-type(1) {
-  width: 10%;
+  width: 5%;
 }
 table.todo-area th:nth-of-type(2) {
-  width: 10%;
+  width: 15%;
 }
 table.todo-area th:nth-of-type(3) {
   width: 30%;
@@ -110,4 +111,22 @@ table.todo-area td button {
 table.todo-area td select {
   width: 100%;
   height: 100%;
+}
+
+/* セレクトボックス */
+select[name="all"] {
+  background-color: #fff;
+}
+select[name="notStarted"] {
+  background-color: #e1ffdf;
+}
+select[name="inProgress"] {
+  background-color: #c4f3fc;
+}
+select[name="done"] {
+  background-color: #ffd1ed;
+}
+
+select option {
+  background-color: #fff;
 }

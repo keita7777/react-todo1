@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./Todo.css";
+import { CreateTodo } from "./components/CreateTodo";
+// import { EditTodo } from "./components/EditTodo";
 
 function Todo() {
   // TODOリストを定義
@@ -10,22 +12,40 @@ function Todo() {
   const [todoDetail, setTodoDetail] = useState("");
   // TODOのIDを定義
   const [todoId, setTodoId] = useState(1);
+  // 入力欄の表示/非表示を定義
+  const [isCreateVisible, setIsCreateVisible] = useState(false);
+  // 編集欄の表示/非表示を定義
+  const [isEditVisible, setIsEditVisible] = useState(false);
 
   // 入力欄の値をtodoTitleに設定
   const onChangeTodoText = (e) => setTodoTitle(e.target.value);
   // 入力欄の値をtodoDetailに設定
   const onChangeTodoDetail = (e) => setTodoDetail(e.target.value);
 
+  // 入力欄を開く
+  const dispCreateTodo = () => {
+    setIsCreateVisible(!isCreateVisible);
+  };
+
   // 追加ボタンクリック時の処理
   const createTodo = () => {
+    if (todoTitle === "") return;
     setTodos([...todos, { id: todoId, title: todoTitle, detail: todoDetail }]);
     setTodoId(todoId + 1);
     setTodoTitle("");
     setTodoDetail("");
+    setIsCreateVisible(false);
+  };
+
+  // キャンセルボタンクリック時の処理
+  const closeCreateTodo = () => {
+    setIsCreateVisible(false);
   };
 
   // 編集ボタンクリック時の処理
-  const onClickEdit = () => {};
+  const onClickEdit = () => {
+    // できてない
+  };
 
   // 削除ボタンクリック時の処理
   const onClickDelete = (index) => {
@@ -36,20 +56,36 @@ function Todo() {
 
   return (
     <>
-      <div className="input-area">
-        <label>タイトル</label>
-        <input
-          placeholder="タイトルを入力"
-          value={todoTitle}
-          onChange={onChangeTodoText}
-        />
-        <label>詳細</label>
-        <input
-          placeholder="詳細を入力"
-          value={todoDetail}
-          onChange={onChangeTodoDetail}
-        />
-        <button onClick={createTodo}>追加</button>
+      <div className="create-box">
+        {isCreateVisible ? (
+          <CreateTodo
+            todoTitle={todoTitle}
+            onChangeTodoText={onChangeTodoText}
+            todoDetail={todoDetail}
+            onChangeTodoDetail={onChangeTodoDetail}
+            createTodo={createTodo}
+            closeTodo={closeCreateTodo}
+          />
+        ) : (
+          ""
+        )}
+
+        {/* {isEditVisible ? (
+          <EditTodo
+            todoTitle={todoTitle}
+            onChangeTodoText={onChangeTodoText}
+            todoDetail={todoDetail}
+            onChangeTodoDetail={onChangeTodoDetail}
+            createTodo={createTodo}
+            closeTodo={closeTodo}
+          />
+        ) : (
+          ""
+        )} */}
+
+        <button onClick={dispCreateTodo} className="create-btn">
+          TODOを作成
+        </button>
       </div>
       <table className="todo-area">
         <tbody>

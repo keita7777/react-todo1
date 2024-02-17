@@ -4,7 +4,7 @@ export const EditTodo = (props) => {
     onChangeTodoText,
     todoDetail,
     onChangeTodoDetail,
-    editTodo,
+    updateTodo,
     closeTodo,
   } = props;
   return (
@@ -22,7 +22,7 @@ export const EditTodo = (props) => {
           value={todoDetail}
           onChange={onChangeTodoDetail}
         />
-        <button onClick={editTodo}>更新</button>
+        <button onClick={updateTodo}>更新</button>
         <button onClick={closeTodo}>キャンセル</button>
       </div>
     </div>
